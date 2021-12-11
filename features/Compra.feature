@@ -14,9 +14,9 @@ Feature: Compra de Passagem Aerea
     And clico no botao Purchase Flight
     Then sou direcionado para a pagina de confirmacao
 
-  Scenario: De Sao Paulo a Roma Compacto
+  Scenario: De Sao Boston a Berin Compacto
     Given que acesso o site Blazedemo
-    When seleciono de "São Paolo" para "Rome"
+    When seleciono de "Boston" para "Berlin"
     Then sou direcionado para a pagina de selecao de voos
     When seleciono o primeiro voo
     Then sou direcionado para a pagina de pagamento
