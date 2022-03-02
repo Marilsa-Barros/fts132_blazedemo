@@ -4,7 +4,7 @@ from selenium import webdriver
 def before_all(context):   # Antes de tudo
 
      # Declarar o Slenium, instanciar como o navegador e apontar o driver
-    context.driver = webdriver.Chrome('drivers/chrome/96/chromedriver.exe')
+    context.driver = webdriver.Chrome('drivers/chrome/98/chromedriver.exe')
 
     # Maximizar a janela do navegador
     context.driver.maximize_window()
@@ -18,10 +18,12 @@ def before_all(context):   # Antes de tudo
 def after_all(context):     # Depois de tudo
 
     # Desligar / Destruir o objeto do Selenium
-    context.quit()
+    #context.quit()
 
     print('Passo Z - Depois de Tudo')
+
 
 # Bloco executado ao final de cada step
 def after_step(context, step):
     print()
+

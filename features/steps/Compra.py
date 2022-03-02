@@ -17,6 +17,7 @@ def before_feature(context, feature):
 
 
 @given(u'que acesso o site Blazedemo')
+@given(U'que acesso o portal Blazedemo')
 def step_impl(context):
     context.driver.get('https://www.blazedemo.com')
     print('Passo 1 - Acessou o site Blazedemo')
@@ -55,8 +56,8 @@ def step_impl(context):
     context.driver.find_element(By.CSS_SELECTOR, 'input.btn.btn-primary').click()
     print('Passo 4 - Clicou no botão Find Flights')
 
-@then(u'sou direcionado para a pagina de selecao de voos')
-def step_impl(context):
+@then(u'sou direcionado para a pagina de selecao de voos de "{origem}" para "{destino}"')
+def step_impl(context, origem, destino):
     print()
     # 3 Principais motivos para um  de automação não funcionar:
     # - Seletores ou Identificadores
@@ -64,11 +65,14 @@ def step_impl(context):
     # - "Programação Exótica"
 
     # assert context.driver.find_element(By.TAG_NAME, 'h3').text() == 'Flights from São Paolo to Rome: '
-'''
+
     time.sleep(5)
-    assert context.driver.find_element(By.XPATH, '/html[1]/body[1]/div[2]/h3[1]').text() == 'Flights from São Paolo to Rome: '
+    re = f'Flights from {origem} to {destino}:'
+    print('texto é ' + context.driver.find_element(By.XPATH, '/html[1]/body[1]/div[2]/h3[1]').text)
+    assert context.driver.find_element(By.XPATH, '/html[1]/body[1]/div[2]/h3[1]').text == re
+
     print('Passo 5 - Direcionou para a página de seleção de vôos')
-'''
+
 
 @when(u'seleciono o primeiro voo')
 def step_impl(context):
@@ -78,7 +82,9 @@ def step_impl(context):
 
 @then(u'sou direcionado para a pagina de pagamento')
 def step_impl(context):
-    assert context.driver.find_element(By.XPATH, "//p[contains(text(),'Please submit the form below to purchase the flight.')]").text == 'Please submit the form below to purchase the flight.'
+    re = 'Please submit the form below to purchase the flight.'
+    assert context.driver.find_element(By.XPATH,
+    "//p[contains(text(),'Please submit the form below to purchase the flight.')]").text == re
     print('Passo 7 - Direcionou para a página de pagamento')
 
 @when(u'preencho os dados para o pagamento')
@@ -97,10 +103,10 @@ def step_impl(context):
 @then(u'sou direcionado para a pagina de confirmacao')
 def step_impl(context):
     print()
-    '''
-    assert context.driver.find_element(By.TAG_NAME, 'h1').text() == 'Thank you for your purchase today!'
+
+    assert context.driver.find_element(By.TAG_NAME, 'h1').text == 'Thank you for your purchase today!'
     print('Passo 10 - Direcionou para a página de confirmação')
-    '''
+
 
 @when(u'seleciono de "{origem}" para "{destino}"')
 def step_impl(context, origem, destino):
